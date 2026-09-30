@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>मेरी Daily Routine Dashboard</title>
+<style>
+:root{
+  --bg:#f7f4ff; --card:#ffffff; --ink:#25233a; --muted:#77738b;
+  --purple:#7657d9; --pink:#e85d9e; --blue:#4f9de8; --green:#43b581;
+  --orange:#f3a33b; --yellow:#f7d154; --line:#e8e2f5;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:"Noto Sans Devanagari","Mangal",system-ui,sans-serif;
+  background:linear-gradient(135deg,#f7f4ff 0%,#fff8f0 50%,#f1fbff 100%);
+  color:var(--ink); padding:24px;
+}
+.container{max-width:1100px;margin:auto}
+.hero{
+  background:linear-gradient(135deg,#6e4bd8,#a05de0,#e85d9e);
+  color:#fff;border-radius:26px;padding:28px 30px;margin-bottom:20px;
+  box-shadow:0 14px 35px #7455b530;
+}
+.hero h1{margin:0 0 8px;font-size:32px}
+.hero p{margin:0;opacity:.92}
+.progress-wrap{margin-top:18px;background:#ffffff35;border-radius:99px;height:13px;overflow:hidden}
+#progress{height:100%;width:0;background:#fff;border-radius:99px;transition:.3s}
+.progress-text{margin-top:8px;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  padding:18px;box-shadow:0 7px 20px #46315c0d;position:relative;
+}
+.card.full{grid-column:1/-1}
+.card h2{font-size:19px;margin:0 0 13px}
+.task{
+  display:grid;grid-template-columns:28px 78px 1fr;gap:10px;align-items:start;
+  padding:11px 0;border-bottom:1px dashed var(--line);
+}
+.task:last-child{border-bottom:0}
+.task input{width:20px;height:20px;accent-color:var(--purple);cursor:pointer}
+.time{font-weight:800;color:var(--purple);font-size:14px}
+.desc{font-size:15px;line-height:1.5}
+.task.done .desc,.task.done .time{text-decoration:line-through;opacity:.52}
+.rest-task{grid-template-columns:28px 78px 1fr}
+.rest-task .rest-icon{font-size:18px;line-height:20px}
+.rest-task .desc{color:var(--muted)}
+
+.badge{
+  display:inline-block;font-size:11px;padding:4px 8px;border-radius:999px;
+  margin-left:5px;color:#fff;background:var(--pink)
+}
+.note{
+  width:100%;min-height:95px;resize:vertical;border:1px solid var(--line);
+  border-radius:14px;padding:12px;font:inherit;outline:none;background:#fffdf9;
+}
+.note:focus{border-color:var(--purple);box-shadow:0 0 0 3px #7657d918}
+.quote{
+  background:linear-gradient(135deg,#fff3c4,#ffe9f4);border-radius:18px;
+  padding:16px;font-weight:700;margin-bottom:15px
+}
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+button{
+  border:0;border-radius:12px;padding:10px 14px;font:inherit;font-weight:700;
+  cursor:pointer;background:#eee8ff;color:#5d43b7
+}
+button.primary{background:var(--purple);color:#fff}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:18px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.card.full{grid-column:auto}.task{grid-template-columns:28px 70px 1fr}.hero h1{font-size:26px}}
+@media print{
+  body{background:#fff;padding:0}.hero{box-shadow:none}.card{box-shadow:none;break-inside:avoid}
+  .buttons{display:none}
+}
+</style>
+
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#7657d9">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="My Daily Routine">
+</head>
+<body>
+<div class="container">
+  <section class="hero">
+    <h1>🌟 मेरी Daily Routine Dashboard</h1>
+    <p>आज का लक्ष्य: छोटे-छोटे कदम → बड़ा परिणाम 💪📚</p>
+    <div class="progress-wrap"><div id="progress"></div></div>
+    <div class="progress-text" id="progressText">0% पूरा हुआ</div>
+  </section>
+
+  <div class="quote">✨ “Consistency ही असली superpower है — आज बस अपना best देना है!”</div>
+
+  <div class="grid">
+    <section class="card full">
+      <h2>🌅 सुबह की शुरुआत</h2>
+      <div class="task"><input type="checkbox"><div class="time">4:00</div><div class="desc">उठना → गर्म पानी पीना + थोड़ा टहलना</div></div>
+      <div class="task"><input type="checkbox"><div class="time">4:30–5:10</div><div class="desc">🏃 Exercise</div></div>
+      <div class="task"><input type="checkbox"><div class="time">5:30–6:00</div><div class="desc">🚿 नहाना + Fresh होना</div></div>
+    </section>
+
+    <section class="card full">
+      <h2>📚 Deep Study Block</h2>
+      <div class="task"><input type="checkbox"><div class="time">6:00–10:00</div><div class="desc">🎯 Center – Shake + Happy Morning Work<br>📚 Study – Current Affairs + Vocabulary + GS Reading</div></div>
+      <div class="task"><input type="checkbox"><div class="time">10:00–12:00</div><div class="desc">🍳 खाना बनाना</div></div>
+    </section>
+
+    <section class="card">
+      <h2>🍱 दोपहर</h2>
+      <div class="task"><input type="checkbox"><div class="time">12:00–1:30</div><div class="desc">खाना + Rest / Workout</div></div>
+      <div class="task"><input type="checkbox"><div class="time">1:30–2:30</div><div class="desc">📖 पढ़ना — 60 मिनट</div></div>
+<div class="task rest-task"><div class="rest-icon">☁️</div><div class="time">2:30–2:40</div><div class="desc">आराम — 10 मिनट</div></div>
+      <div class="task"><input type="checkbox"><div class="time">2:40–3:30</div><div class="desc">📖 पढ़ना — 50 मिनट</div></div>
+<div class="task rest-task"><div class="rest-icon">☁️</div><div class="time">3:30–3:40</div><div class="desc">आराम — 10 मिनट</div></div>
+      <div class="task"><input type="checkbox"><div class="time">3:40–4:30</div><div class="desc">📖 पढ़ना — 50 मिनट</div></div>
+<div class="task rest-task"><div class="rest-icon">☁️</div><div class="time">4:30–4:40</div><div class="desc">आराम — 10 मिनट</div></div>
+      <div class="task"><input type="checkbox"><div class="time">4:40–5:30</div><div class="desc">📖 पढ़ना — 50 मिनट</div></div>
+    </section>
+
+    <section class="card">
+      <h2>🏠 शाम का Reset</h2>
+      <div class="task"><input type="checkbox"><div class="time">5:30–6:00</div><div class="desc">🍛 खाना खाना<br><span class="badge">बर्तन + झाड़ू</span></div></div>
+      <div class="task"><input type="checkbox"><div class="time">6:00–7:00</div><div class="desc">👨‍👩‍👧 घरवालों + दोस्तों से बातें / Free Time</div></div>
+      <div class="task"><input type="checkbox"><div class="time">7:00–8:00</div><div class="desc">📚 पढ़ना</div></div>
+    </section>
+
+    <section class="card">
+      <h2>🌙 रात की Routine</h2>
+      <div class="task"><input type="checkbox"><div class="time">8:00–8:30</div><div class="desc">🔁 पूरे दिन का Revision + Diary + Target</div></div>
+      <div class="task"><input type="checkbox"><div class="time">8:30–9:30</div><div class="desc">🍳 खाना बनाना</div></div>
+      <div class="task"><input type="checkbox"><div class="time">9:30–10:30</div><div class="desc">🍽️ खाना</div></div>
+      <div class="task"><input type="checkbox"><div class="time">10:30–11:00</div><div class="desc">📕 Book Reading</div></div>
+      <div class="task"><input type="checkbox"><div class="time">11:30</div><div class="desc">😴 सो जाना</div></div>
+    </section>
+
+    <section class="card">
+      <h2>✍️ आज का Caption / Journal</h2>
+      <textarea id="caption" class="note" placeholder="आज मैंने क्या अच्छा किया? क्या सीखा? कल क्या बेहतर करूँगा?"></textarea>
+      <div style="margin-top:12px">
+        <label for="diaryPhoto" style="display:inline-block;background:#eee8ff;color:#5d43b7;padding:10px 14px;border-radius:12px;font-weight:700;cursor:pointer">
+          📷 Diary Page / Photo Upload
+        </label>
+        <input id="diaryPhoto" type="file" accept="image/*" style="display:none">
+        <div id="photoPreview" style="margin-top:12px"></div>
+      </div>
+      <div class="buttons">
+        <button class="primary" onclick="saveData()">💾 Save Today</button>
+        <button onclick="resetData()">↻ Reset</button>
+        <button onclick="window.print()">🖨️ Print</button>
+      </div>
+    </section>
+
+    <section class="card full">
+      <h2>🎯 College वाला Special Rule</h2>
+      <div class="task"><input type="checkbox"><div class="time">जब जरूरी हो</div><div class="desc">🏫 College जाना हो तो routine को उसी दिन adjust करना है; बाकी study blocks को जितना संभव हो पूरा करना है।</div></div>
+    </section>
+  </div>
+
+  <footer>💜 अपना routine perfect नहीं, consistent बनाओ।</footer>
+</div>
+
+<script>
+const boxes=[...document.querySelectorAll('input[type="checkbox"]')];
+const caption=document.getElementById('caption');
+const diaryPhoto=document.getElementById('diaryPhoto');
+const photoPreview=document.getElementById('photoPreview');
+
+function update(){
+  const done=boxes.filter(b=>b.checked).length;
+  const pct=Math.round(done/boxes.length*100);
+  document.getElementById('progress').style.width=pct+'%';
+  document.getElementById('progressText').textContent=pct+'% पूरा हुआ';
+  boxes.forEach(b=>b.closest('.task').classList.toggle('done',b.checked));
+}
+boxes.forEach((b,i)=>{
+  b.addEventListener('change',()=>{localStorage.setItem('routineChecks',JSON.stringify(boxes.map(x=>x.checked)));update();});
+});
+caption.addEventListener('input',()=>localStorage.setItem('routineCaption',caption.value));
+
+diaryPhoto.addEventListener('change',()=>{
+  const file=diaryPhoto.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    photoPreview.innerHTML='<img src="'+reader.result+'" alt="Uploaded diary page" style="max-width:100%;max-height:420px;border-radius:14px;border:1px solid var(--line);display:block">';
+    try{localStorage.setItem('routinePhoto',reader.result);}catch(e){
+      alert('Photo preview तैयार है, लेकिन यह photo बहुत बड़ी है इसलिए browser में save नहीं हो पाई।');
+    }
+  };
+  reader.readAsDataURL(file);
+});
+
+function load(){
+  try{
+    const c=JSON.parse(localStorage.getItem('routineChecks')||'[]');
+    boxes.forEach((b,i)=>b.checked=!!c[i]);
+    caption.value=localStorage.getItem('routineCaption')||'';
+    const savedPhoto=localStorage.getItem('routinePhoto');
+    if(savedPhoto) photoPreview.innerHTML='<img src="'+savedPhoto+'" alt="Saved diary page" style="max-width:100%;max-height:420px;border-radius:14px;border:1px solid var(--line);display:block">';
+  }catch(e){}
+  update();
+}
+function saveData(){
+  localStorage.setItem('routineChecks',JSON.stringify(boxes.map(x=>x.checked)));
+  localStorage.setItem('routineCaption',caption.value);
+  alert('आज का dashboard save हो गया! 🌟');
+}
+function resetData(){
+  if(confirm('आज के सभी ticks और caption reset करें?')){
+    boxes.forEach(b=>b.checked=false);caption.value='';
+    localStorage.removeItem('routineChecks');localStorage.removeItem('routineCaption');localStorage.removeItem('routinePhoto');diaryPhoto.value='';photoPreview.innerHTML='';update();
+  }
+}
+load();
+</script>
+
+<div id="installBar" style="display:none;position:fixed;left:14px;right:14px;bottom:14px;z-index:9999;background:#fff;border:1px solid #e8e2f5;border-radius:18px;padding:12px 14px;box-shadow:0 12px 30px #46315c22;align-items:center;gap:10px">
+  <span style="font-size:22px">📲</span>
+  <div style="flex:1;font-size:13px"><b>My Daily Routine</b><br><span style="color:#77738b">इसे Home Screen पर App की तरह रखें</span></div>
+  <button id="installBtn" class="primary" style="padding:9px 12px">Install</button>
+  <button id="closeInstall" style="padding:9px 10px">×</button>
+</div>
+<script>
+let deferredPrompt;
+const installBar=document.getElementById('installBar');
+const installBtn=document.getElementById('installBtn');
+const closeInstall=document.getElementById('closeInstall');
+window.addEventListener('beforeinstallprompt',(e)=>{
+  e.preventDefault(); deferredPrompt=e; installBar.style.display='flex';
+});
+installBtn.addEventListener('click',async()=>{
+  if(!deferredPrompt) return;
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt=null; installBar.style.display='none';
+});
+closeInstall.addEventListener('click',()=>installBar.style.display='none');
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>
